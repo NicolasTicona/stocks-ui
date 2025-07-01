@@ -1,39 +1,116 @@
-# stocks-ui
+# Stocks UI
 
-This template should help get you started developing with Vue 3 in Vite.
+Stocks UI is a Vue 3 application built with Vite to provide stock market insights, recommendations, and analysis
 
-## Recommended IDE Setup
+![Image](https://i.ibb.co/jPVf7P0m/Screenshot-2025-07-01-at-7-51-04-AM.png)
+![Image](https://i.ibb.co/Wp7VcJtx/Screenshot-2025-07-01-at-7-51-10-AM.png)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Type Support for `.vue` Imports in TS
+## Technologies Used
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **Vue 3**: Frontend framework for building user interfaces.
+- **Vite**: Fast build tool for modern web applications.
+- **Pinia**: State management library for Vue.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **TypeScript**: Strongly typed programming language for better code quality.
+- **ESLint**: Linter for maintaining code quality.
+- **Prettier**: Code formatter for consistent styling.
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Dependencies
 
-## Project Setup
+### Core Dependencies
 
-```sh
-npm install
+- `vue`: ^3.5.17
+- `pinia`: ^3.0.3
+- `@vueuse/core`: ^13.4.0
+
+### Development Dependencies
+
+- `vite`: ^7.0.0
+- `typescript`: ~5.8.0
+- `tailwindcss`: ^3.4.17
+- `eslint`: ^9.29.0
+- `prettier`: ^3.5.3
+- `@vitejs/plugin-vue`: ^6.0.0
+- `vue-tsc`: ^2.2.10
+
+---
+
+## Features
+
+1. **Stock Recommendations**:
+
+   - Displays top stock recommendations based on rating score, target score, sentiment analysis and moving average crossover.
+   - Includes detailed stock analysis with headlines and algorithm suggestions.
+
+2. **Stock Market Overview**:
+
+   - Provides a paginated list of stocks based on the swechallenge stock data and enriched the data with today's prices
+   - Allows filtering, pagination and sorting of stocks.
+
+3. **Stock current prices (Open, High, Low, Change, etc)**:
+   - Displays today's prices for each stock
+
+---
+
+## Endpoints
+
+### 1. **Get Paginated Stocks**
+
+**URL**: `/stocks`  
+**Method**: `GET`  
+**Params**:
+
+- `page`: Page number (integer).
+- `limit`: Number of items per page (integer).
+- `filter`: Search term for filtering stocks (string).
+
+**Example**:
+
+```bash
+curl "http://localhost:8000/stocks?page=1&limit=10&filter=AAPL"
 ```
 
-### Compile and Hot-Reload for Development
+### 2. **Get Stock Recommendations**
 
-```sh
-npm run dev
+**URL**: `/recommendations`  
+**Method**: `GET`
+
+**Example**:
+
+```bash
+curl "http://localhost:8000/recommendations"
 ```
 
-### Type-Check, Compile and Minify for Production
+### 3. **Get Stock Analysis**
 
-```sh
-npm run build
+**URL**: `/analyze`  
+**Method**: `GET`  
+**Params**:
+
+- `stock`: Stock ticker symbol (string).
+
+**Example**:
+
+```bash
+curl "http://localhost:8000/analyze?stock=NVDA"
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+---
 
-```sh
-npm run lint
+## Environment Variables
+
+### `.env Example`
+
+```env
+VITE_API_BASE_URL=
+```
+
+### `.env.production Example`
+
+```env
+VITE_API_BASE_URL=
 ```
