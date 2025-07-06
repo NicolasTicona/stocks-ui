@@ -147,8 +147,8 @@ const handlePageChange = () => {
 };
 
 const handlePreviousPage = () => {
-    if (stocksStore.currentPage > 1) {
-        stocksStore.setCurrentPage(stocksStore.currentPage - 1);
+    if (stocksStore.currentPage > 0) {
+        stocksStore.setStocksFromApi(stocksStore.currentPage - 1, stocksStore.itemsPerPage, filter.value);
     }
 };
 
