@@ -3,11 +3,12 @@ import type { StockAnalysis } from '@/interfaces/stock-recommendation';
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
-export const getPaginatedStocks = async (page: number, itemsPerPage = 5, filter: string): Promise<StockListApiResponse> => {
+export const getPaginatedStocks = async (page: number, itemsPerPage = 5, filter: string, sortBy: string): Promise<StockListApiResponse> => {
     try {
         const params = new URLSearchParams({
             page: page.toString(),
             limit: itemsPerPage.toString(),
+            sortBy: sortBy,
         });
 
         if (filter) {

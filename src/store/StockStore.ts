@@ -21,10 +21,10 @@ export const useStockStore = defineStore('stock', {
         isLoading: false,
     } as StockState),
     actions: {
-        async setStocksFromApi(page: number, limit: number, search: string) {
+        async setStocksFromApi(page: number, limit: number, search: string, sortBy: string) {
             try {
                 this.isLoading = true;
-                const response = await getPaginatedStocks(page, limit, search);
+                const response = await getPaginatedStocks(page, limit, search, sortBy);
                 this.isLoading = false;
                 this.stocks = response.stocks;
                 this.totalItems = response.total;

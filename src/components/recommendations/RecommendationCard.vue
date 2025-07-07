@@ -8,9 +8,15 @@
                 </span>
             </div>
             <div class="mb-3 text-sm text-gray-700 flex gap-1 items-baseline">
-                <span class="text-xl font-bold text-gray-900">{{ props.stock.currentQuote?.currentPrice }}</span>
-                <span class="text-green-600">
-                    <img class="inline" width="16" src="@/assets/icons/arrow-trending-up.svg" alt="arrow-icon">
+                <span class="text-xl font-bold"
+                    :class="{ 'text-green-600': isChangePositive, 'text-red-600': !isChangePositive }">{{
+                        props.stock.currentQuote?.currentPrice
+                    }}</span>
+                <span class="text-green-600"
+                    :class="{ 'text-green-600': isChangePositive, 'text-red-600': !isChangePositive }">
+                    <arrow-trending-up class="w-5 inline-block"
+                        v-if="props.stock.currentQuote?.change > 0"></arrow-trending-up>
+                    <arrow-trending-down class="w-5 inline-block" v-else></arrow-trending-down>
 
                     {{ props.stock.currentQuote?.change }} ({{ props.stock.currentQuote?.changePercentage }})</span>
             </div>
@@ -38,12 +44,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- <div class="text-center mt-4">
-                <a href="#" class="text-blue-600 text-sm font-medium hover:underline">
-                    View Details
-                </a>
-            </div> -->
         </div>
     </div>
 </template>
@@ -53,6 +53,8 @@ import { computed, defineProps, onMounted } from 'vue';
 import type { StockRecommendation } from '@/interfaces/stock-recommendation';
 import LineSkeleton from '@/components/shared/LineSkeleton.vue';
 import { useRecommendationStore } from '@/store/RecommendationStore';
+import ArrowTrendingUp from '@/assets/icons/arrow-trending-up.vue';
+import ArrowTrendingDown from '@/assets/icons/arrow-trending-down.vue';
 
 const props = defineProps<{
     stock: StockRecommendation
@@ -79,5 +81,7 @@ const getHeadlines = (headlines: string[] | undefined) => {
 
     return headlines.length > 3 ? headlines.slice(0, 3) : headlines;
 }
+
+const isChangePositive = props.stock.currentQuote.change > 0;
 
 </script>
